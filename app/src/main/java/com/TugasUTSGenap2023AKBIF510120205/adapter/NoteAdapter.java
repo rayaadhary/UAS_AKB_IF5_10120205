@@ -35,7 +35,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(notes.get(position).getTitle());
-        holder.desc.setText(notes.get(position).getDesc());
+        holder.category.setText(notes.get(position).getCategory());
         holder.date.setText(notes.get(position).getDate());
 
         holder.itemView.setOnClickListener(v -> {
@@ -52,17 +52,16 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
-        TextView desc;
+        TextView category;
         TextView date;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title_note);
-            desc = itemView.findViewById(R.id.desc_note);
+            category = itemView.findViewById(R.id.category_note);
             date = itemView.findViewById(R.id.date_note);
         }
     }
 }
-
 
 // 10120205 - Raya Adhary - IF5
