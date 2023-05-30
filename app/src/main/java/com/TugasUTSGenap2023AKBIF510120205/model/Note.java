@@ -5,12 +5,14 @@ import java.io.Serializable;
 public class Note implements Serializable {
     String id;
     String title;
+    String category;
     String desc;
     String date;
 
-    public Note(String id, String title, String desc, String date){
+    public Note(String id, String title, String category, String desc, String date){
         this.id = id;
         this.title = title;
+        this.category = category;
         this.desc = desc;
         this.date = date;
     }
@@ -31,6 +33,13 @@ public class Note implements Serializable {
         this.title = title;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getDesc() {
         return desc;
@@ -49,5 +58,4 @@ public class Note implements Serializable {
     }
 }
 
-
-// 10120205 - Raya Adhary - IF5
+// Raya Adhary - 10120205 - IF5

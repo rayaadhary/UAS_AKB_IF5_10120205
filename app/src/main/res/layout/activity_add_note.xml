@@ -28,44 +28,50 @@
     </LinearLayout>
     <EditText
         android:id="@+id/title"
-        android:hint="Judul"
+        android:hint="Title"
         android:layout_marginHorizontal="20dp"
         android:layout_below="@id/title_add_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:layout_marginTop="10dp"
-        android:id="@+id/txt_desc"
-        android:hint="Deskripsi"
-        android:inputType="textMultiLine|textCapSentences"
-        android:minHeight="200dp"
-        android:gravity="top"
+        android:id="@+id/category"
+        android:hint="Category"
         android:layout_marginHorizontal="20dp"
         android:layout_below="@id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/txt_desc"
+        android:hint="Notes"
+        android:inputType="textMultiLine|textCapSentences"
+        android:minHeight="200dp"
+        android:gravity="top"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/buttonAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_below="@id/txt_desc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="40dp"
         android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="#B2DFDB"
-        android:text="SIMPAN" />
-
+        android:text="SIMPAN"
+        android:layout_marginHorizontal="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/buttonDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_below="@id/buttonAdd"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="HAPUS"
+        android:backgroundTint="#FFCDD2"
         android:layout_gravity="bottom|end"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#FFCDD2"
-        android:text="HAPUS" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

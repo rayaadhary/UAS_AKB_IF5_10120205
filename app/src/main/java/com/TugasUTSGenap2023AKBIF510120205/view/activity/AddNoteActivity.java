@@ -22,7 +22,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
     ImageButton button;
     EditText editTitle;
-//    EditText editCategory;
+    EditText editCategory;
     EditText editDesc;
     Button addButton;
     Button deleteButton;
@@ -38,6 +38,7 @@ public class AddNoteActivity extends AppCompatActivity {
         note = (Note) getIntent().getSerializableExtra("Note");
         button = findViewById(R.id.back);
         editTitle = findViewById(R.id.title);
+        editCategory = findViewById(R.id.category);
         editDesc = findViewById(R.id.txt_desc);
         addButton = findViewById(R.id.buttonAdd);
         deleteButton = findViewById(R.id.buttonDelete);
@@ -56,6 +57,10 @@ public class AddNoteActivity extends AppCompatActivity {
                     Toast.makeText(this, "Judul Catatan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (editCategory.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "Kategori Catatan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (editDesc.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Isi Catatan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 }
@@ -64,16 +69,18 @@ public class AddNoteActivity extends AppCompatActivity {
                 Note n = new Note(
                         d.getTime() + "",
                         editTitle.getText().toString(),
+                        editCategory.getText().toString(),
                         editDesc.getText().toString() ,
-                         date + ""
+                        date + ""
                 );
 
                 noteInterface.create(n);
                 finish();
-                Toast.makeText(this, "Catatan berhasil ditambah", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Catatan berhasil di tambah", Toast.LENGTH_SHORT).show();
             });
         } else {
             editTitle.setText(note.getTitle());
+            editCategory.setText(note.getCategory());
             editDesc.setText(note.getDesc());
 
             deleteButton.setVisibility(View.VISIBLE);
@@ -84,7 +91,10 @@ public class AddNoteActivity extends AppCompatActivity {
                     Toast.makeText(this, "Judul Catatan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                if (editCategory.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "Kategori Catatan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (editDesc.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Isi Catatan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 }
@@ -93,21 +103,21 @@ public class AddNoteActivity extends AppCompatActivity {
                 CharSequence date = DateFormat.format("EEEE, d MMMM yyyy HH:mm",d.getTime());
 
                 note.setTitle(editTitle.getText().toString());
+                note.setCategory(editCategory.getText().toString());
                 note.setDesc(editDesc.getText().toString());
-                note.setDate("terakhir diedit " + date + "");
+                note.setDate((String) date);
                 noteInterface.update(note);
                 finish();
-                Toast.makeText(this, "Catatan berhasil diedit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Catatan berhasil di edit", Toast.LENGTH_SHORT).show();
             });
         }
 
         deleteButton.setOnClickListener(v-> {
             noteInterface.delete(note.getId());
             finish();
-            Toast.makeText(this, "Catatan berhasil dihapus", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Catatan berhasil di hapus", Toast.LENGTH_SHORT).show();
         });
     }
 }
 
-
-// 10120205 - Raya Adhary - IF5
+// Raya Adhary - 10120205 - IF5
