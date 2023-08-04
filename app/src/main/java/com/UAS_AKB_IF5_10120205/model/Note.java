@@ -16,11 +16,20 @@ public class Note implements Serializable {
         // Default constructor required for Firebase Database
     }
 
-    public Note(String title, String category, String desc, String date) {
+    public Note(String id, String title, String category, String desc, String date) {
+        this.id = id;
         this.title = title;
         this.category = category;
         this.desc = desc;
         this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

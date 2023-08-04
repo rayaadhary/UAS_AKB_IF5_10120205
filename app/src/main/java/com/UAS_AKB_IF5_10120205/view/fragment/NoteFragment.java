@@ -19,6 +19,8 @@ import com.UAS_AKB_IF5_10120205.model.Note;
 import com.UAS_AKB_IF5_10120205.view.activity.AddNoteActivity;
 import com.UAS_AKB_IF5_10120205.view.activity.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +47,15 @@ public class NoteFragment extends Fragment {
         return mView;
     }
 
+    private String getCurrentUserUid() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            return currentUser.getUid();
+        }
+        return null;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mainActivity = (MainActivity) getActivity();
@@ -57,8 +68,26 @@ public class NoteFragment extends Fragment {
             startActivity(new Intent(getContext(), AddNoteActivity.class));
         });
 
-        // Initialize Firebase Realtime Database reference
-        notesReference = new DatabaseHelper().getNotesReference();
+        // Initialize RecyclerView
+        setupRecyclerView();
+
+        // Fetch data from Firebase and update RecyclerView
+        fetchNotesFromFirebase();
+    }
+
+    // Create a method to initialize and set up the RecyclerView
+    private void setupRecyclerView() {
+        notes = new ArrayList<>();
+        noteAdapter = new NoteAdapter(notes);
+        recyclerView.setAdapter(noteAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+    }
+
+    // Create a method to fetch data from Firebase Realtime Database
+    private void fetchNotesFromFirebase() {
+        String currentUserUid = getCurrentUserUid();
+        notesReference = new DatabaseHelper().getNotesReference().child(currentUserUid);
         notesReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
@@ -75,9 +104,9 @@ public class NoteFragment extends Fragment {
                 if (updatedNote != null) {
                     String noteId = dataSnapshot.getKey();
                     for (int i = 0; i < notes.size(); i++) {
-                        if (notes.get(i).equals(noteId)) {
+                        if (notes.get(i).getId().equals(noteId)) {
                             notes.set(i, updatedNote);
-                            noteAdapter.notifyDataSetChanged();
+                            noteAdapter.notifyItemChanged(i);
                             break;
                         }
                     }
@@ -88,9 +117,9 @@ public class NoteFragment extends Fragment {
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 String removedNoteId = dataSnapshot.getKey();
                 for (int i = 0; i < notes.size(); i++) {
-                    if (notes.get(i).equals(removedNoteId)) {
+                    if (notes.get(i).getId().equals(removedNoteId)) {
                         notes.remove(i);
-                        noteAdapter.notifyDataSetChanged();
+                        noteAdapter.notifyItemRemoved(i);
                         break;
                     }
                 }
@@ -106,11 +135,5 @@ public class NoteFragment extends Fragment {
                 // Not needed for this implementation
             }
         });
-
-        notes = new ArrayList<>();
-        noteAdapter = new NoteAdapter(notes);
-        recyclerView.setAdapter(noteAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
     }
 }

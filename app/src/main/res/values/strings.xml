@@ -8,7 +8,7 @@
     <string name="nim">NIM: 10120205</string>
     <string name="email">Email: raya.10120205.@mahasiswa.unikom.ac.id</string>
     <string name="txt_welcome">SELAMAT DATANG</string>
-    <string name="txt_intro">Ini adalah sebuah aplikasi untuk mencatat</string>
+    <string name="txt_intro">Sebuah Aplikasi untuk mencatat yang disimpan melalui Realtime Database Firebase dan disertai dengan fitur otentikasi pengguna menggunakan Firebase Authentication </string>
     <string name="page1">Page 1 of 2</string>
     <string name="page2">Page 2 of 2</string>
     <string name="page3">Page 3 of 3</string>
