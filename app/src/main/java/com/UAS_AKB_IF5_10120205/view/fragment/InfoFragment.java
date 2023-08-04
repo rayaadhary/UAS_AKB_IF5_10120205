@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.view.fragment;
+package com.UAS_AKB_IF5_10120205.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.TugasUTSGenap2023AKBIF510120205.R;
-import com.TugasUTSGenap2023AKBIF510120205.adapter.InfoFragmentAdapter;
-import com.TugasUTSGenap2023AKBIF510120205.view.activity.MainActivity;
+import com.UAS_AKB_IF5_10120205.R;
+import com.UAS_AKB_IF5_10120205.adapter.InfoFragmentAdapter;
+import com.UAS_AKB_IF5_10120205.view.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

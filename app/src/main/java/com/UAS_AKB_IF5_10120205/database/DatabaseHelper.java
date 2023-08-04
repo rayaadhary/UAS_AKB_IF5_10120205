@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.database;
+package com.UAS_AKB_IF5_10120205.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.TugasUTSGenap2023AKBIF510120205.model.Note;
-import com.TugasUTSGenap2023AKBIF510120205.NoteInterface;
+import com.UAS_AKB_IF5_10120205.model.Note;
+import com.UAS_AKB_IF5_10120205.NoteInterface;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements NoteInterface {
 

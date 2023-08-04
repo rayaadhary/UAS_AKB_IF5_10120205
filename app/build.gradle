@@ -3,18 +3,18 @@ plugins {
 }
 
 android {
-    namespace 'com.TugasUTSGenap2023AKBIF510120205'
+    namespace 'com.UAS_AKB_IF5_10120205'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.TugasUTSGenap2023AKBIF510120205"
+        applicationId "com.UAS_AKB_IF5_10120205"
         minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
         def date = new Date();
         def formattedDate = date.format('yyyy-MM-dd-HHmmss')
-        setProperty("archivesBaseName", "TugasUTSGenap2023AKBIF510120205_" + versionName + "_"+formattedDate)
+        setProperty("archivesBaseName", "UAS_AKB_IF5_10120205_" + versionName + "_"+formattedDate)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.view.fragment;
+package com.UAS_AKB_IF5_10120205.view.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,13 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.TugasUTSGenap2023AKBIF510120205.NoteInterface;
-import com.TugasUTSGenap2023AKBIF510120205.R;
-import com.TugasUTSGenap2023AKBIF510120205.adapter.NoteAdapter;
-import com.TugasUTSGenap2023AKBIF510120205.database.DatabaseHelper;
-import com.TugasUTSGenap2023AKBIF510120205.model.Note;
-import com.TugasUTSGenap2023AKBIF510120205.view.activity.AddNoteActivity;
-import com.TugasUTSGenap2023AKBIF510120205.view.activity.MainActivity;
+import com.UAS_AKB_IF5_10120205.NoteInterface;
+import com.UAS_AKB_IF5_10120205.R;
+import com.UAS_AKB_IF5_10120205.adapter.NoteAdapter;
+import com.UAS_AKB_IF5_10120205.database.DatabaseHelper;
+import com.UAS_AKB_IF5_10120205.model.Note;
+import com.UAS_AKB_IF5_10120205.view.activity.AddNoteActivity;
+import com.UAS_AKB_IF5_10120205.view.activity.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class NoteFragment extends Fragment  {
     private List<Note> note;
     private NoteInterface noteInterface;
     private RecyclerView recyclerView;
-    private com.TugasUTSGenap2023AKBIF510120205.adapter.NoteAdapter noteAdapter;
+    private com.UAS_AKB_IF5_10120205.adapter.NoteAdapter noteAdapter;
     private FloatingActionButton addButton;
 
     @Nullable
@@ -46,7 +46,7 @@ public class NoteFragment extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mainActivity = (MainActivity) getActivity();
-        mainActivity.getSupportActionBar().show();
+        mainActivity.getSupportActionBar().hide();
 
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.mynote);

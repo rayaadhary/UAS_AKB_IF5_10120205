@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205;
+package com.UAS_AKB_IF5_10120205;
 
 import android.content.Context;
 

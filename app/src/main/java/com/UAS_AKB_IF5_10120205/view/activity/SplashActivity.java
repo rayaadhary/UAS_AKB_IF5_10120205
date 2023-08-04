@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.view.activity;
+package com.UAS_AKB_IF5_10120205.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.TugasUTSGenap2023AKBIF510120205.R;
+import com.UAS_AKB_IF5_10120205.R;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

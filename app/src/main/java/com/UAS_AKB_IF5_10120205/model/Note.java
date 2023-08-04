@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.model;
+package com.UAS_AKB_IF5_10120205.model;
 
 import java.io.Serializable;
 

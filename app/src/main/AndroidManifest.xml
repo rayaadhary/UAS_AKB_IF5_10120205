@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.TugasUTSGenap2023AKBIF510120205">
+    package="com.UAS_AKB_IF5_10120205">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasUTSGenap2023AKBIF510120205">
-        <activity android:name="com.TugasUTSGenap2023AKBIF510120205.view.activity.AddNoteActivity"></activity>
-        <activity android:name="com.TugasUTSGenap2023AKBIF510120205.view.activity.MainActivity" />
-        <activity android:name="com.TugasUTSGenap2023AKBIF510120205.view.activity.SplashActivity"
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.RegisterActivity"
+            android:exported="false" />
+        <activity android:name=".view.activity.AddNoteActivity" />
+        <activity android:name=".view.activity.MainActivity" />
+        <activity
+            android:name=".view.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

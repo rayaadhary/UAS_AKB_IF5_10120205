@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.view.activity;
+package com.UAS_AKB_IF5_10120205.view.activity;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.TugasUTSGenap2023AKBIF510120205.NoteInterface;
-import com.TugasUTSGenap2023AKBIF510120205.R;
-import com.TugasUTSGenap2023AKBIF510120205.database.DatabaseHelper;
-import com.TugasUTSGenap2023AKBIF510120205.model.Note;
+import com.UAS_AKB_IF5_10120205.NoteInterface;
+import com.UAS_AKB_IF5_10120205.R;
+import com.UAS_AKB_IF5_10120205.database.DatabaseHelper;
+import com.UAS_AKB_IF5_10120205.model.Note;
 
 import java.util.Date;
 

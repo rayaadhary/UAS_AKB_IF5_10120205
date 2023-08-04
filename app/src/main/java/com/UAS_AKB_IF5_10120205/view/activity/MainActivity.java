@@ -1,17 +1,16 @@
-package com.TugasUTSGenap2023AKBIF510120205.view.activity;
+package com.UAS_AKB_IF5_10120205.view.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.TugasUTSGenap2023AKBIF510120205.R;
-import com.TugasUTSGenap2023AKBIF510120205.view.fragment.InfoFragment;
-import com.TugasUTSGenap2023AKBIF510120205.view.fragment.NoteFragment;
-import com.TugasUTSGenap2023AKBIF510120205.view.fragment.ProfileFragment;
+import com.UAS_AKB_IF5_10120205.R;
+import com.UAS_AKB_IF5_10120205.view.fragment.InfoFragment;
+import com.UAS_AKB_IF5_10120205.view.fragment.NoteFragment;
+import com.UAS_AKB_IF5_10120205.view.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().hide();
 
         //menampilkan halaman yang pertama muncul
         getFragmentPage(new InfoFragment());

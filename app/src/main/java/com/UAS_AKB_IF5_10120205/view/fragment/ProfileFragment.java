@@ -1,4 +1,4 @@
-package com.TugasUTSGenap2023AKBIF510120205.view.fragment;
+package com.UAS_AKB_IF5_10120205.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.TugasUTSGenap2023AKBIF510120205.R;
-import com.TugasUTSGenap2023AKBIF510120205.view.activity.MainActivity;
+import com.UAS_AKB_IF5_10120205.R;
+import com.UAS_AKB_IF5_10120205.view.activity.MainActivity;
 
 public class ProfileFragment extends Fragment {
 
