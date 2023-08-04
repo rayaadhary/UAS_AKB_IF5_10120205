@@ -1,53 +1,20 @@
 package com.UAS_AKB_IF5_10120205.database;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import androidx.annotation.Nullable;
+public class DatabaseHelper {
 
-import com.UAS_AKB_IF5_10120205.model.Note;
-import com.UAS_AKB_IF5_10120205.NoteInterface;
+    private static final String NOTES_PATH = "notes";
+    private DatabaseReference databaseReference;
 
-public class DatabaseHelper extends SQLiteOpenHelper implements NoteInterface {
-
-    public DatabaseHelper(@Nullable Context context) {
-        super(context, "db_note", null, 1);
+    public DatabaseHelper() {
+        databaseReference = FirebaseDatabase.getInstance().getReference(NOTES_PATH);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE tbl_note (id TEXT, title TEXT, category TEXT,description TEXT, date TEXT)");
+    public DatabaseReference getNotesReference() {
+        return databaseReference;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE tbl_note");
-    }
-
-    public Cursor read(){
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT * FROM tbl_note", null);
-    }
-
-    public boolean create (Note note){
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.execSQL("INSERT INTO tbl_note VALUES ('"+note.getId()+"','"+note.getTitle()+"','"+note.getCategory()+"','"+note.getDesc()+"','"+note.getDate()+"')");
-        return true;
-    }
-
-    public boolean update (Note note){
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.execSQL("UPDATE tbl_note SET title='"+note.getTitle()+"', category='"+note.getCategory()+"', description='"+note.getDesc()+"', date='"+note.getDate()+"' WHERE id='"+note.getId()+"'");
-        return true;
-    }
-
-    public boolean delete(String id){
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.execSQL("DELETE FROM tbl_note WHERE id='"+id+"'");
-        return true;
-    }
+    // No need for create, update, and delete methods. Firebase handles these operations automatically.
 }
-
-// Raya Adhary - 10120205- IF5

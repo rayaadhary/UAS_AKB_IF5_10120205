@@ -9,12 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasUTSGenap2023AKBIF510120205">
-        <activity
-            android:name=".view.activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.RegisterActivity"
-            android:exported="false" />
+        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".view.activity.AddNoteActivity" />
         <activity android:name=".view.activity.MainActivity" />
         <activity

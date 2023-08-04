@@ -1,5 +1,6 @@
 package com.UAS_AKB_IF5_10120205.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,17 +13,22 @@ import com.UAS_AKB_IF5_10120205.view.fragment.InfoFragment;
 import com.UAS_AKB_IF5_10120205.view.fragment.NoteFragment;
 import com.UAS_AKB_IF5_10120205.view.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
 
+    private FirebaseAuth mauth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mauth= FirebaseAuth.getInstance();
 
-//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
         getSupportActionBar().hide();
 
         //menampilkan halaman yang pertama muncul
@@ -48,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                             R.id.profile:
                         fragment = new ProfileFragment();
                         break;
+                    case
+                            R.id.logout:
+                       logout();
+                        break;
                 }
                 return getFragmentPage(fragment);
             }
@@ -64,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser=mauth.getCurrentUser();
+        if (currentUser==null){
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        }
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        finish();
+    }
+
 }
 
 

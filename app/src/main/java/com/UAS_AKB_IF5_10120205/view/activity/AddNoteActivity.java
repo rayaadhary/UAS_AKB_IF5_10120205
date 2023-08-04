@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.UAS_AKB_IF5_10120205.NoteInterface;
 import com.UAS_AKB_IF5_10120205.R;
 import com.UAS_AKB_IF5_10120205.database.DatabaseHelper;
 import com.UAS_AKB_IF5_10120205.model.Note;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.Date;
 
@@ -28,7 +28,7 @@ public class AddNoteActivity extends AppCompatActivity {
     Button deleteButton;
     TextView titleAdd;
 
-    private NoteInterface noteInterface;
+    private DatabaseReference notesReference;
     Note note = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class AddNoteActivity extends AppCompatActivity {
         addButton = findViewById(R.id.buttonAdd);
         deleteButton = findViewById(R.id.buttonDelete);
         titleAdd = findViewById(R.id.txt_add);
-        noteInterface = new DatabaseHelper(this);
+        notesReference = new DatabaseHelper().getNotesReference();
 
         button.setOnClickListener(v -> {
             finish();
@@ -67,16 +67,16 @@ public class AddNoteActivity extends AppCompatActivity {
                 Date d = new Date();
                 CharSequence date = DateFormat.format("EEEE, d MMM yyyy HH:mm", d.getTime());
                 Note n = new Note(
-                        d.getTime() + "",
                         editTitle.getText().toString(),
                         editCategory.getText().toString(),
-                        editDesc.getText().toString() ,
+                        editDesc.getText().toString(),
                         date + ""
                 );
 
-                noteInterface.create(n);
+                String newNoteId = notesReference.push().getKey();
+                notesReference.child(newNoteId).setValue(n);
                 finish();
-                Toast.makeText(this, "Catatan berhasil di tambah", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Catatan berhasil ditambahkan", Toast.LENGTH_SHORT).show();
             });
         } else {
             editTitle.setText(note.getTitle());
@@ -106,18 +106,14 @@ public class AddNoteActivity extends AppCompatActivity {
                 note.setCategory(editCategory.getText().toString());
                 note.setDesc(editDesc.getText().toString());
                 note.setDate((String) date);
-                noteInterface.update(note);
                 finish();
-                Toast.makeText(this, "Catatan berhasil di edit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Catatan berhasil diedit", Toast.LENGTH_SHORT).show();
             });
         }
 
         deleteButton.setOnClickListener(v-> {
-            noteInterface.delete(note.getId());
             finish();
-            Toast.makeText(this, "Catatan berhasil di hapus", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Catatan berhasil dihapus", Toast.LENGTH_SHORT).show();
         });
     }
 }
-
-// Raya Adhary - 10120205 - IF5

@@ -1,28 +1,26 @@
 package com.UAS_AKB_IF5_10120205.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 
 public class Note implements Serializable {
-    String id;
+    @Exclude
+    String id; // This field will be excluded from Firebase Database
     String title;
     String category;
     String desc;
     String date;
 
-    public Note(String id, String title, String category, String desc, String date){
-        this.id = id;
+    public Note() {
+        // Default constructor required for Firebase Database
+    }
+
+    public Note(String title, String category, String desc, String date) {
         this.title = title;
         this.category = category;
         this.desc = desc;
         this.date = date;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -57,5 +55,3 @@ public class Note implements Serializable {
         this.date = date;
     }
 }
-
-// Raya Adhary - 10120205 - IF5
