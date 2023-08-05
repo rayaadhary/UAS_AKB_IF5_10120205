@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class NoteFragment extends Fragment {
 
     private MainActivity mainActivity;

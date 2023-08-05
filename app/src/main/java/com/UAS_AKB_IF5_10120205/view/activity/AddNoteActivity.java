@@ -1,5 +1,12 @@
 package com.UAS_AKB_IF5_10120205.view.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -10,14 +17,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.UAS_AKB_IF5_10120205.R;
 import com.UAS_AKB_IF5_10120205.database.DatabaseHelper;
 import com.UAS_AKB_IF5_10120205.model.Note;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Date;
+import java.util.Random;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -31,6 +44,26 @@ public class AddNoteActivity extends AppCompatActivity {
 
     private DatabaseReference notesReference;
     Note note = null;
+
+    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+    private void sendCloudMessage(String title, String message) {
+        // Create a new FirebaseMessaging instance
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+
+        // Create a RemoteMessage to build the message to send
+        RemoteMessage.Builder messageBuilder = new RemoteMessage.Builder("843257242028@fcm.googleapis.com")
+                .setMessageId(Integer.toString(new Random().nextInt(1000)))
+                .addData("title", title)
+                .addData("message", message);
+
+        // Replace "your-sender-id" with your Firebase Cloud Messaging (FCM) sender ID
+
+        // Send the message
+        firebaseMessaging.send(messageBuilder.build());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +79,12 @@ public class AddNoteActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.buttonDelete);
         titleAdd = findViewById(R.id.txt_add);
         notesReference = new DatabaseHelper().getNotesReference();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         button.setOnClickListener(v -> {
             finish();
         });
+
 
         if (note == null) {
             deleteButton.setVisibility(View.GONE);
@@ -83,6 +117,10 @@ public class AddNoteActivity extends AppCompatActivity {
                     notesReference.child(userId).child(newNoteId).setValue(n);
                     finish();
                     Toast.makeText(this, "Catatan berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+//                    notification();
+                    // After saving the note, send a cloud message
+                    sendCloudMessage(editTitle.getText().toString(), "Data telah disimpan");
+
                 } else {
                     Toast.makeText(this, "Failed to add note: Invalid note ID", Toast.LENGTH_SHORT).show();
                 }
@@ -124,23 +162,73 @@ public class AddNoteActivity extends AppCompatActivity {
 
         deleteButton.setOnClickListener(v -> {
             if (note != null) {
-                String noteId = note.getId();
-                if (noteId != null) {
-                    notesReference.child(userId).child(noteId).removeValue()
-                            .addOnSuccessListener(aVoid -> {
-                                finish();
-                                Toast.makeText(this, "Catatan berhasil dihapus", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(this, "Gagal menghapus catatan", Toast.LENGTH_SHORT).show();
-                            });
-                } else {
-                    Toast.makeText(this, "Gagal menghapus catatan: ID catatan tidak valid", Toast.LENGTH_SHORT).show();
-                }
+                showDeleteConfirmationDialog(note);
             } else {
                 Toast.makeText(this, "Catatan tidak ditemukan", Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private void showDeleteConfirmationDialog(Note note) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Konfirmasi Hapus");
+        builder.setMessage("Apakah Anda yakin ingin menghapus catatan ini?");
+        builder.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String noteId = note.getId();
+                if (noteId != null) {
+                    notesReference.child(userId).child(noteId).removeValue()
+                            .addOnSuccessListener(aVoid -> {
+                                finish();
+                                Toast.makeText(AddNoteActivity.this, "Catatan berhasil dihapus", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(AddNoteActivity.this, "Gagal menghapus catatan", Toast.LENGTH_SHORT).show();
+                            });
+                } else {
+                    Toast.makeText(AddNoteActivity.this, "Gagal menghapus catatan: ID catatan tidak valid", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing, dismiss the dialog
+            }
+        });
+        builder.create().show();
+    }
+
+
+
+    private void notification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel =
+                    new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "n")
+                .setContentText("Catatan")
+                .setSmallIcon(R.drawable.icon_notes)
+                .setAutoCancel(true)
+                .setContentText("Data telah disimpan");
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        managerCompat.notify(999, builder.build());
     }
 }

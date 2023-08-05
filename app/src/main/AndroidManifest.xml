@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasUTSGenap2023AKBIF510120205">
+        <activity android:name=".view.activity.FirebaseActivity" />
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".view.activity.AddNoteActivity" />
@@ -22,6 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".view.activity.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
+
 
 </manifest>

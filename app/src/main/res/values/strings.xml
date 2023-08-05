@@ -1,4 +1,5 @@
 <resources>
+    <string name="server_key">AAAAxFYMYaw:APA91bGTn75RB5ER1XX4v-SrsHWHQKTjvzvl9zWUcQE_01gRvMqttRGMucWI4tvfxkiUqqaodD5MQ-lvYHM7t9RZVPW-iOiaXRpno7Fp2oqWjI8FzhISFObV5z9mHRcWCF656dvSIasO</string>
     <string name="app_name">UAS_AKB_IF5_10120205</string>
     <string name="profil">Profil</string>
     <string name="catat">Catat</string>
