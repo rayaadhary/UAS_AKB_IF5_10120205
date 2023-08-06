@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import com.UAS_AKB_IF5_10120205.R;
 
 public class InfoFragment1 extends Fragment {
+    // 10120205 - Raya Adhary - IF5
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

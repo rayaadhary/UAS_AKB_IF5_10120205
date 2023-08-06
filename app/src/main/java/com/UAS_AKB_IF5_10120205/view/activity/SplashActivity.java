@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.UAS_AKB_IF5_10120205.R;
 
 public class SplashActivity extends AppCompatActivity {
+    // 10120205 - Raya Adhary - IF5
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,9 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
+// 10120205 - Raya Adhary - IF5
 
     private FirebaseAuth mauth;
-    private EditText Email, Password;
+    private EditText Email, Password, ConfirmPassword;
     private Button btnLogin, btnRegister;
 
     @Override
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         mauth= FirebaseAuth.getInstance();
         Email = findViewById(R.id.reg_mail);
         Password = findViewById(R.id.reg_password);
+        ConfirmPassword = findViewById(R.id.reg_confirm_password);
 
         btnLogin = findViewById(R.id.login_text);
         btnRegister = findViewById(R.id.register_btn);
@@ -54,11 +56,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         String user= Email.getText().toString().trim();
         String pass= Password.getText().toString().trim();
+        String confirmpass= ConfirmPassword.getText().toString().trim();
         if (user.isEmpty()){
             Email.setError("Email tidak boleh kosong");
 
         }if (pass.isEmpty()){
             Password.setError("Password tidak boleh kosong");
+        }
+        if (confirmpass.isEmpty()){
+            ConfirmPassword.setError("Konfirmasi Password tidak boleh kosong");
+        }
+        if (!pass.equals(confirmpass)){
+            Password.setError("Password tidak sesuai");
         }
         else{
             mauth.createUserWithEmailAndPassword(user,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -13,6 +13,7 @@ import com.UAS_AKB_IF5_10120205.R;
 import com.UAS_AKB_IF5_10120205.view.activity.MainActivity;
 
 public class ProfileFragment extends Fragment {
+// 10120205 - Raya Adhary - IF5
 
     private MainActivity mainActivity;
 

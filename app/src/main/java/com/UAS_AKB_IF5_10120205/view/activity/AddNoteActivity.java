@@ -34,6 +34,8 @@ import java.util.Random;
 
 public class AddNoteActivity extends AppCompatActivity {
 
+    // 10120205 - Raya Adhary - IF5
+
     ImageButton button;
     EditText editTitle;
     EditText editCategory;
@@ -49,20 +51,23 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
     private void sendCloudMessage(String title, String message) {
-        // Create a new FirebaseMessaging instance
-        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+        // Replace "topic_name" with the topic to which you want to send the message
+        FirebaseMessaging.getInstance().subscribeToTopic("topic_name")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Send the notification data to the subscribed topic
+                        RemoteMessage.Builder builder = new RemoteMessage.Builder("843257242028@gcm.googleapis.com")
+                                .setMessageId(Integer.toString(new Random().nextInt(1000)))
+                                .addData("title", title)
+                                .addData("body", message);
 
-        // Create a RemoteMessage to build the message to send
-        RemoteMessage.Builder messageBuilder = new RemoteMessage.Builder("843257242028@fcm.googleapis.com")
-                .setMessageId(Integer.toString(new Random().nextInt(1000)))
-                .addData("title", title)
-                .addData("message", message);
-
-        // Replace "your-sender-id" with your Firebase Cloud Messaging (FCM) sender ID
-
-        // Send the message
-        firebaseMessaging.send(messageBuilder.build());
+                        FirebaseMessaging.getInstance().send(builder.build());
+                    } else {
+                        Toast.makeText(this, "Failed to subscribe to the topic", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 
 
     @Override
@@ -120,6 +125,8 @@ public class AddNoteActivity extends AppCompatActivity {
 //                    notification();
                     // After saving the note, send a cloud message
                     sendCloudMessage(editTitle.getText().toString(), "Data telah disimpan");
+                    String title = "Data telah berhasil disimpan";
+                    notification(title);
 
                 } else {
                     Toast.makeText(this, "Failed to add note: Invalid note ID", Toast.LENGTH_SHORT).show();
@@ -156,6 +163,8 @@ public class AddNoteActivity extends AppCompatActivity {
                 String noteId = note.getId();
                 notesReference.child(userId).child(noteId).setValue(note);
                 Toast.makeText(this, "Catatan berhasil diedit", Toast.LENGTH_SHORT).show();
+                String title = "Data telah berhasil diubah";
+                notification(title);
                 finish();
             });
         }
@@ -183,6 +192,8 @@ public class AddNoteActivity extends AppCompatActivity {
                             .addOnSuccessListener(aVoid -> {
                                 finish();
                                 Toast.makeText(AddNoteActivity.this, "Catatan berhasil dihapus", Toast.LENGTH_SHORT).show();
+                                String title = "Data telah berhasil dihapus";
+                                notification(title);
                             })
                             .addOnFailureListener(e -> {
                                 Toast.makeText(AddNoteActivity.this, "Gagal menghapus catatan", Toast.LENGTH_SHORT).show();
@@ -203,7 +214,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
 
-    private void notification() {
+    private void notification(String text) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel =
                     new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
@@ -216,7 +227,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 .setContentText("Catatan")
                 .setSmallIcon(R.drawable.icon_notes)
                 .setAutoCancel(true)
-                .setContentText("Data telah disimpan");
+                .setContentText(text);
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -232,3 +243,5 @@ public class AddNoteActivity extends AppCompatActivity {
         managerCompat.notify(999, builder.build());
     }
 }
+
+// 10120205 - Raya Adhary - IF5

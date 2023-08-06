@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 public class InfoFragmentAdapter extends FragmentStatePagerAdapter {
+// 10120205 - Raya Adhary - IF5
 
     private List<Fragment> fragmentList;
     public InfoFragmentAdapter(@NonNull FragmentManager fm, List<Fragment> fragmentList) {

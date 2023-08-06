@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
+// 10120205 - Raya Adhary - IF5
 
     private FirebaseAuth mauth;
 

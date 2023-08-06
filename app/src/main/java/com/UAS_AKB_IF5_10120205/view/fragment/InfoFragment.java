@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoFragment extends Fragment {
+    // 10120205 - Raya Adhary - IF5
+
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private MainActivity mainActivity;

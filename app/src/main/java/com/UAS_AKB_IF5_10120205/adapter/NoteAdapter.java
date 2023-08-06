@@ -16,6 +16,7 @@ import com.UAS_AKB_IF5_10120205.view.activity.AddNoteActivity;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
+// 10120205 - Raya Adhary - IF5
 
     private List<Note> notes;
 

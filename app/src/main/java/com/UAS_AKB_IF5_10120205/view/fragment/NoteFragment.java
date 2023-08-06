@@ -32,6 +32,7 @@ import java.util.List;
 
 
 public class NoteFragment extends Fragment {
+// 10120205 - Raya Adhary - IF5
 
     private MainActivity mainActivity;
     private List<Note> notes;

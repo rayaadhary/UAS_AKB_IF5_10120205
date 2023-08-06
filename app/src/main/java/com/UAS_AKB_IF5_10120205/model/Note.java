@@ -5,6 +5,8 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 
 public class Note implements Serializable {
+    // 10120205 - Raya Adhary - IF5
+
     @Exclude
     String id; // This field will be excluded from Firebase Database
     String title;
@@ -64,3 +66,5 @@ public class Note implements Serializable {
         this.date = date;
     }
 }
+
+// 10120205 - Raya Adhary - IF5

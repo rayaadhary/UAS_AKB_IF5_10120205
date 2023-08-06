@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class DatabaseHelper {
+// 10120205 - Raya Adhary - IF5
 
     private static final String NOTES_PATH = "notes";
     private DatabaseReference databaseReference;
@@ -18,3 +19,5 @@ public class DatabaseHelper {
 
     // No need for create, update, and delete methods. Firebase handles these operations automatically.
 }
+
+// 10120205 - Raya Adhary - IF5

@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class FirebaseActivity extends AppCompatActivity {
+    // 10120205 - Raya Adhary - IF5
+
     EditText etToken;
 
     @Override
@@ -43,3 +45,5 @@ public class FirebaseActivity extends AppCompatActivity {
                 });
     }
 }
+
+// 10120205 - Raya Adhary - IF5
