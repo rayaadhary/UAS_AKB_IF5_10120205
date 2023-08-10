@@ -106,9 +106,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (task.isSuccessful())
                     {
-                        Toast.makeText(LoginActivity.this, "Login Successfully..", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-
+                        if(mauth.getCurrentUser().isEmailVerified()) {
+                            Toast.makeText(LoginActivity.this, "Login Successfully..", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Email not verified, Please verify your email.", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                     else

@@ -75,9 +75,10 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Toast.makeText(RegisterActivity.this, "User registered successfully!", Toast.LENGTH_SHORT).show();
-
-                        startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-
+                        mauth.getCurrentUser().sendEmailVerification();
+                        mauth.signOut();
+//                        startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                        finish();
                     }
                     else
                     {
